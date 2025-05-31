@@ -125,7 +125,8 @@ while IFS= read -r line || [[ -n "$line" ]]; do
     eval "echo \"$line\"" >> "${CONF_FILE}"
 done < "${TEMPLATE_FILE}"
 
-export LD_LIBRARY_PATH="/usr/lib/x86_64-linux-gnu/"
+source /usr/local/Ascend/ascend-toolkit/set_env.sh
+export LD_LIBRARY_PATH="/usr/lib/x86_64-linux-gnu/":$LD_LIBRARY_PATH
 PY=python3
 
 # -----------------------------------------------------------------------------
@@ -150,7 +151,7 @@ function start_mcp_server() {
         --port="${MCP_PORT}" \
         --base_url="${MCP_BASE_URL}" \
         --mode="${MCP_MODE}" \
-        --api_key="${MCP_HOST_API_KEY}" &
+        --api_key="${MCP_HOST_API_KEY}" \ &
 }
 
 # -----------------------------------------------------------------------------
